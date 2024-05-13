@@ -17,23 +17,26 @@ TIME_LIMIT=$4
 MEM_LIMIT=$5
 DEST_FOLDER=$6
 
-mkdir $DEST_FOLDER
+CPP_VERSION=c++17
+
+mkdir -p $DEST_FOLDER
 
 # Generate statement, solution, and testcases
 echo "preparing problem"
 cd "$PROBLEM_SLUG"
 # pdflatex "statement.tex"
-rm *.aux *.log *.dvi *.out *.toc *.synctex.gz
+# rm -f *.aux *.log *.dvi *.out *.toc *.synctex.gz
 
-g++ solution.cpp -O2 -Wall -o solution -std=c++11
+g++ solution.cpp -O2 -Wall -o solution -std=$CPP_VERSION
 $TCFRAME_HOME/scripts/tcframe build
 ./runner
-cd ".."
+cd - > /dev/null
 
 echo "creating problem"
-rm -r "temp"
-mkdir "temp"
-cd "temp"
+TEMP_FOLDER=$DEST_FOLDER/temp
+rm -rf "$TEMP_FOLDER"
+mkdir "$TEMP_FOLDER"
+cd "$TEMP_FOLDER"
 
 # Generate domjudge-problem.ini
 echo "probid=$PROBID" > domjudge-problem.ini
@@ -43,33 +46,38 @@ echo "timelimit='$TIME_LIMIT'" >> domjudge-problem.ini
 echo "---" > problem.yaml
 echo "name: $PROBLEM_NAME" >> problem.yaml
 
-FILE=../$PROBLEM_SLUG/validator.cpp # whether custom checker is used
+cd - > /dev/null
+FILE=$PROBLEM_SLUG/validator.cpp # whether custom checker is used
 if test -f "$FILE"; then
-    echo "validation: custom" >> problem.yaml
+    echo "validation: custom" >> $TEMP_FOLDER/problem.yaml
     # Add validator
-    mkdir "output_validators"
-    cp "../$PROBLEM_SLUG/validator.cpp" "output_validators/validator.cpp"
+    mkdir "$TEMP_FOLDER/output_validators"
+    cp "$PROBLEM_SLUG/validator.cpp" "$TEMP_FOLDER/output_validators/validator.cpp"
 fi
 
+cd "$TEMP_FOLDER"
 echo "limits:" >> problem.yaml
 echo "    memory: $MEM_LIMIT" >> problem.yaml
 
 # Add testcase
-mkdir "data"
-mkdir "data/secret"
-for testcases in "../$PROBLEM_SLUG/tc/*"; do
-    cp $testcases "data/secret"
+cd - > /dev/null
+mkdir -p "$TEMP_FOLDER/data/secret"
+for testcases in "$PROBLEM_SLUG/tc/*"; do
+    cp $testcases "$TEMP_FOLDER/data/secret"
 done
-cd "data/secret"
+
+cd "$TEMP_FOLDER/data/secret"
+rm -f *_sample_*
 rename 's/\.out$/.ans/' *
 rename 's/^.*_//' *
-cd "../.."
+cd - > /dev/null
 
 # Add statement
-cp "../$PROBLEM_SLUG/statement.pdf" "problem.pdf"
+cp "$PROBLEM_SLUG/statement.pdf" "$TEMP_FOLDER/problem.pdf"
 
 # zipping everything
-zip -r "problem.zip" "."
-cp "problem.zip" "../$DEST_FOLDER/$PROBID.zip"
-mv "problem.zip" "../$PROBLEM_SLUG/$PROBID.zip"
-cd ..``
+zip -r "$TEMP_FOLDER/problem.zip" "$TEMP_FOLDER" > /dev/null
+cp "$TEMP_FOLDER/problem.zip" "$DEST_FOLDER/$PROBID.zip"
+mv "$TEMP_FOLDER/problem.zip" "$PROBLEM_SLUG/$PROBID.zip"
+
+echo "creating problem complete"
