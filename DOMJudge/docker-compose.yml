@@ -18,6 +18,11 @@ services:
       - MYSQL_PASSWORD=djpw
       - MYSQL_DATABASE=domjudge
     command: --max-connections=1000
+    healthcheck:
+      test: mariadb -h localhost -u root --password=rootpw -e 'SELECT 1'
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   domserver:
     container_name: domjudge-domserver
@@ -27,7 +32,8 @@ services:
     ports:
       - 12345:80
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     environment:
       - CONTAINER_TIMEZONE=Asia/Jakarta
       - MYSQL_HOST=mariadb
@@ -35,6 +41,11 @@ services:
       - MYSQL_USER=domjudge
       - MYSQL_PASSWORD=djpw
       - MYSQL_DATABASE=domjudge
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   judgehost-0:
     container_name: domjudge-judgehost-0
@@ -44,7 +55,9 @@ services:
     networks:
       - domjudge
     depends_on:
-      - domserver
+      domserver:
+        condition: service_healthy
+    restart: unless-stopped
     environment:
       - DAEMON_ID=0
       - JUDGEDAEMON_PASSWORD=${API_PASSWORD}
@@ -57,7 +70,9 @@ services:
     networks:
       - domjudge
     depends_on:
-      - domserver
+      domserver:
+        condition: service_healthy
+    restart: unless-stopped
     environment:
       - DAEMON_ID=1
       - JUDGEDAEMON_PASSWORD=${API_PASSWORD}
@@ -70,7 +85,9 @@ services:
     networks:
       - domjudge
     depends_on:
-      - domserver
+      domserver:
+        condition: service_healthy
+    restart: unless-stopped
     environment:
       - DAEMON_ID=2
       - JUDGEDAEMON_PASSWORD=${API_PASSWORD}
