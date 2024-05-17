@@ -78,11 +78,11 @@ protected:
         for(int i=0;i<10;i++)
             CASE(N = rnd.nextInt(1, NMAX),
                 K = rnd.nextInt(1, KMAX),
-                T = rnd.nextInt(1, TMAX));
+                T = rnd.nextLongLong(1, TMAX));
         for(int i=0;i<10;i++)
             CASE(N = rnd.nextInt(1, NMAX),
                 K = rnd.nextInt(1, KMAX),
-                T = rnd.nextInt(1, TMAX));
+                T = rnd.nextLongLong(1, TMAX));
     }
 
 private:
