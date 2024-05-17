@@ -10,9 +10,9 @@ vector<vector<ll>> multiply(vector<vector<ll>> &a, vector<vector<ll>> &b) {
 
     vector<vector<ll>> res(a.size(), vector<ll>(b[0].size(), 0));
     
-    for (ll i = 0; i < a.size(); i++) {
-        for (ll j = 0; j < b[0].size(); j++) {
-            for (ll k = 0; k < a[0].size(); k++) {
+    for (ll i = 0; i < (int)a.size(); i++) {
+        for (ll j = 0; j < (int)b[0].size(); j++) {
+            for (ll k = 0; k < (int)a[0].size(); k++) {
                 ll add = (a[i][k] * b[k][j] % MOD + MOD) % MOD;
                 res[i][j] = (res[i][j] + add) % MOD;
             }
@@ -25,7 +25,7 @@ vector<vector<ll>> multiply(vector<vector<ll>> &a, vector<vector<ll>> &b) {
 vector<vector<ll>> matrixPow(vector<vector<ll>> &a, ll e) {
     if (e == 0) {
         vector<vector<ll>> res(a.size(), vector<ll>(a.size(), 0));
-        for (ll i = 0; i < a.size(); i++) res[i][i] = 1;
+        for (ll i = 0; i < (int)a.size(); i++) res[i][i] = 1;
         return res;
     } else if (e == 1) {
         return a;
