@@ -7,7 +7,7 @@ int main() {
     string s, t;
     cin >> s >> t;
 
-    for(int i=0; i<s.length(); i++){
+    for(int i=0; i<(int)s.length(); i++){
         int alp = s[i] - 'a';
         occ[alp].insert(i);
     }
@@ -15,7 +15,7 @@ int main() {
     int ans = 1;
     int curIdx = -1;
 
-    for(int i=0; i<t.length(); i++){
+    for(int i=0; i<(int)t.length(); i++){
         int alp = t[i] - 'a';
         auto it = occ[alp].upper_bound(curIdx);
 

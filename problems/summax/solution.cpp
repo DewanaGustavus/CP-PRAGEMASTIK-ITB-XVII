@@ -10,6 +10,10 @@ int squared(int n)
     return n * n;
 }
 
+const int MAXN = 1e5;
+const int MAXK = 10;
+int dp[MAXN + 1][MAXK + 1];
+
 // Time Complexity O ( N * K * K )
 int32_t main()
 {
@@ -25,7 +29,6 @@ int32_t main()
     for (int i = 1; i <= N; i++)
         prefix_sum[i] = prefix_sum[i - 1] + arr[i];
 
-    int dp[N + 1][K + 1];
 
     for (int i = 0; i <= N; i++)
         for (int j = 0; j <= K; j++)
