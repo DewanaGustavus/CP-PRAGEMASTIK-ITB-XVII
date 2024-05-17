@@ -5,7 +5,7 @@ using namespace std;
 
 class ProblemSpec : public BaseProblemSpec {
 protected:
-    const long long NMAX = 1e3;
+    const long long NMAX = 1e10;
     long long N;
 
     int ans;
