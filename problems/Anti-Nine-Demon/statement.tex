@@ -46,7 +46,7 @@
 \begin{center}
 
     
-    \section*{Brankas Aneh} % ganti judul soal
+    \section*{Anti Nine Demon} % ganti judul soal
 
     \begin{tabular}{ | c c | }
         \hline
@@ -58,42 +58,51 @@
 
 \subsection*{Deskripsi}
 
-Pada suatu hari yang tidak cerah, sekolah menengah atas Abydos menemukan bahwa mereka terlilit hutang besar. Shiroko dan teman-temannya memutuskan untuk membobol suatu bank untuk membayar hutang sekolah mereka.
+Dikarenakan sebuah bencana skala dunia, Rudeus terjebak dalam benua Iblis untuk kedua kalinya. Dengan kemampuan yang sudah berkembang jauh, Rudeus sekarang telah mempelajari $N$ buah sihir dengan kekuatan serangan $P_{i}$ yang dapat dia kombinasikan sebebasnya (sihir yang sama juga dapat dikombinasikan lebih dari sekali). 
 
-Di hari pembobolan, Shiroko menemukan suatu brankas yang terlihat berisi barang sangat berharga yang dijaga dengan kunci kombinasi sepanjang $N$ dengan kondisi awal masing-masing angka adalah $X_i$ (kunci dapat bernilai negatif). Teman Shiroko sebelumnya telah menemukan kertas berisi $N$ buah angka $Y_i$ yang diduga besar adalah kunci brankas. Namun, mengubah angka dalam kunci brankas tidak semudah yang mereka kira. Brankas tersebut menyediakan $N$ buah tombol $A_i$ dan $N$ buah tombol $B_i$. Apabila tombol $A_i$ ditekan, nilai $X_{i-1}$ dan $X_{i+1}$ akan bertambah sebesar 1. Sebaliknya, apabila tombol $B_i$ ditekan, nilai $X_{i-1}$ dan $X_{i+1}$ akan berkurang sebesar 1.
+Di tengah perjalanan pulang, Rudeus tiba-tiba bertemu dengan iblis yang sangat kuat menghalangi satu-satunya jalan pulang. Rudeus merasa pertempurannya tidak dapat ia menangkan sehingga dia pun kabur dari iblis itu. Setelah kabur dari pertempuran, Rudeus bertemu lagi dengan Hitogami dalam mimpinya. Hitogami mengatakan kelemahan satu-satunya dari iblis itu adalah kombinasi dari $K$ serangan yang jumlah kekuatannya \textbf{habis dibagi 9}.
 
-Bantulah Shiroko dan teman-temannya menentukan apakah mereka dapat menghasilkan kombinasi $Y$ dari kondisi awal $X$!
+Setelah bangun, Rudeus ingin menghitung berapa kemungkinan sihir yang dapat dia gunakan. Namun, karena terlalu banyak, dia pun menyerah. Bantulah Rudeus untuk mengihitung berapa banyak kemungkinan sihir yang dapat ia gunakan modulo \textbf{998244353}!
 
 \subsection*{Format Masukan}
 
-Baris pertama terdiri dari satu bilangan bulat positif $T$ ($1 \leq N \leq 10^{9}$)  yang banyak kasus.
+Baris pertama terdiri dari dua bilangan bulat positif $N$ ($1 \leq N \leq 10^{5}$) dan $K$ ($1 \leq K \leq 10^{9}$), yang masing-masing menyatakan jumlah sihir yang telah Rudeus pelajari dan banyak sihir yang harus dikombinasikan.
 
-Setiap kasus terdiri atas 3 baris. Baris pertama terdiri dari satu bilangan bulat positif $N$ ($1 \leq N \leq 10^{9}$)  yang menyatakan panjang kunci kombinasi. 
-$2$ baris berikutnya berisi nilai $X_i$ ($-10^{5} \leq X_i \leq 10^{5}$) dan $Y_i$ ($-10^{5} \leq Y_i \leq 10^{5}$) yang masing-masing menyatakan kondisi awal brankas dan perkiraan kunci brankas.
+$N$ baris berikutnya berisi nilai $P_i$ ($1 \leq P_i \leq 10^{100}$) yang menyatakan besar kekuatan serangan sihir ke-$i$ yang Rudeus miliki.
+
 
 \subsection*{Format Keluaran}
 
-Setiap kasus memiliki keluaran satu kata yaitu "Ya" apabila kunci brankas dapat dicapai dari kondisi awal dan "Tidak" apabila sebaliknya.
-
-\subsection*{Batasan Tambahan}
-$\sum_{i=1}^T N_i \leq 5 \times 10^{8}$
+Suatu bilangan bulat yang menyatakan banyak kemungkinan kombinasi sihir yang dapat Rudeus gunakan modulo \textbf{998244353}.
 
 \begin{multicols}{2}
 \subsection*{Contoh Masukan 1}
 \begin{lstlisting}
-2
-5
-4 2 1 4 6
-6 4 2 6 5
-5
-1 2 3 4 5
-6 6 6 6 6
+3 3
+1
+4
+7
 \end{lstlisting}
 \columnbreak
 \subsection*{Contoh Keluaran 1}
 \begin{lstlisting}
-Ya
-Tidak
+9
+\end{lstlisting}
+\vfill
+\null
+\end{multicols}
+
+\begin{multicols}{2}
+\subsection*{Contoh Masukan 2}
+\begin{lstlisting}
+2 3
+1
+1
+\end{lstlisting}
+\columnbreak
+\subsection*{Contoh Keluaran 2}
+\begin{lstlisting}
+0
 \end{lstlisting}
 \vfill
 \null
@@ -102,14 +111,20 @@ Tidak
 
 \subsection*{Penjelasan}
 
-Pada contoh 1, kunci brankas dapat dicapai dengan melakukan aksi berikut:
+Pada contoh 1, Rudeus memiliki 3 sihir dengan serangan masing-masing 1, 4, dan 7 dan harus mengombinasikan 3 sihir. Berikut adalah 9 kombinasi yang dapat digunakan Rudeus:
 
 \begin{enumerate}
-\item Menekan tombol $A_1$ sebanyak 2 kali
-\item Menekan tombol $A_2$ sebanyak 2 kali
-\item Menekan tombol $B_3$ sebanyak 1 kali
+\item $[1, 2, 2]: 1 + 4 + 4 = 9$
+\item $[2, 1, 2]: 4 + 1 + 4 = 9$
+\item $[2, 2, 1]: 4 + 4 + 1 = 9$
+\item $[1, 1, 3]: 1 + 1 + 7 = 9$
+\item $[1, 3, 1]: 1 + 7 + 1 = 9$
+\item $[3, 1, 1]: 7 + 1 + 7 = 9$
+\item $[2, 3, 3]: 1 + 4 + 4 = 18$
+\item $[3, 2, 3]: 1 + 4 + 4 = 18$
+\item $[2, 3, 3]: 1 + 4 + 4 = 18$
 \end{enumerate}
 
-Pada contoh 2, dapat ditunjukkan bahwa kunci brankas tidak akan mungkin dapat dicapai dari kondisi awal.
+Pada contoh 2, Rudeus tidak dapat membuat satupun kombinasi sihir yang menghasilkan kelipatan 9.
 
 \end{document}
