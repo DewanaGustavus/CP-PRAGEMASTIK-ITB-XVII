@@ -96,7 +96,7 @@ void solve() {
     }
 
     forn(i, n) {
-        forn(j, m) cout << ans[i][j] << ' '; cout << '\n';
+        forn(j, m) cout << ans[i][j] << " \n"[j == (m-1)];
     }
 }
 
