@@ -2,6 +2,8 @@
 
 #include <bits/stdc++.h>
 
+#define ll long long
+
 using namespace std;
 
 const int MOD = 998244353;
@@ -247,7 +249,7 @@ void fast_polymult(vector<int> &P, vector<int> &Q) {
     P.resize(res_len);
 }
 
-void dnc(vector<int>& a, int n) {
+void dnc(vector<int>& a, ll n) {
     if (n <= 1) return;
 
     vector<int> half(a);
@@ -274,10 +276,10 @@ void dnc(vector<int>& a, int n) {
 }
 
 void solve() {
-    int n, k; cin >> n >> k;
+    ll n, k; cin >> n >> k;
     vector<int> freq(9, 0);
 
-    for (int i = 0; i < n; i++) {
+    for (ll i = 0; i < n; i++) {
         string s; cin >> s;
 
         int temp = 0;
