@@ -23,6 +23,7 @@ int squared(int n)
     return n * n;
 }
 
+// Time Complexity O ( N * (2 ^ N) )
 int32_t main()
 {
 

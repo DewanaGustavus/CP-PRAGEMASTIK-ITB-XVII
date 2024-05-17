@@ -10,6 +10,7 @@ int squared(int n)
     return n * n;
 }
 
+// Time Complexity O ( N * K * K )
 int32_t main()
 {
 
