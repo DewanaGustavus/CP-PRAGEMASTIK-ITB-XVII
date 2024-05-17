@@ -1,0 +1,130 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx, eso-pic}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\hypersetup{ colorlinks=true, linkcolor=black, filecolor=magenta, urlcolor=cyan}
+\geometry{ a4paper, total={170mm,257mm}, top=10mm, right=20mm, bottom=20mm, left=20mm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3em}
+\renewcommand{\headrulewidth}{0pt}
+
+\rfoot{\thepage}
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\lfoot{\textbf{CP PRAGEMASTIK ITB XVII}}
+\pagenumbering{gobble}
+
+\fancyfoot[CE,CO]{\thepage}
+\lstset{
+    basicstyle=\ttfamily\small,
+    columns=fixed,
+    extendedchars=true,
+    breaklines=true,
+    tabsize=2,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=none,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    prebreak={},
+    keywordstyle=\color[rgb]{0.627,0.126,0.941},
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\color[rgb]{01,0,0},
+    captionpos=t,
+    escapeinside={(\%}{\%)}
+}
+
+\begin{document}
+
+\begin{center}
+
+    
+    \section*{Anti Nine Demon} % ganti judul soal
+
+    \begin{tabular}{ | c c | }
+        \hline
+        Batas Waktu  & 1s \\    % jangan lupa ganti time limit
+        Batas Memori & 256MB \\  % jangan lupa ganti memory limit
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection*{Deskripsi}
+
+Dikarenakan sebuah bencana skala dunia, Rudeus terjebak dalam benua Iblis untuk kedua kalinya. Dengan kemampuan yang sudah berkembang jauh, Rudeus sekarang telah mempelajari $N$ buah sihir dengan kekuatan serangan $P_{i}$ yang dapat dia kombinasikan sebebasnya (sihir yang sama juga dapat dikombinasikan lebih dari sekali). 
+
+Di tengah perjalanan pulang, Rudeus tiba-tiba bertemu dengan iblis yang sangat kuat menghalangi satu-satunya jalan pulang. Rudeus merasa pertempurannya tidak dapat ia menangkan sehingga dia pun kabur dari iblis itu. Setelah kabur dari pertempuran, Rudeus bertemu lagi dengan Hitogami dalam mimpinya. Hitogami mengatakan kelemahan satu-satunya dari iblis itu adalah kombinasi dari $K$ serangan yang jumlah kekuatannya habis dibagi 9
+
+Setelah bangun, Rudeus ingin menghitung berapa kemungkinan sihir yang dapat dia gunakan. Namun, karena terlalu banyak, dia pun menyerah. Bantulah Rudeus untuk mengihitung berapa banyak kemungkinan sihir yang dapat ia gunakan!
+
+\subsection*{Format Masukan}
+
+Baris pertama terdiri dari dua bilangan bulat positif $N$ dan $K$ ($1 \leq$ N, K $\leq 10^{18}$), yang masing-masing menyatakan jumlah sihir yang telah Rudeus pelajari dan banyak sihir yang harus dikombinasikan.
+
+$N$ baris berikutnya berisi nilai $P_i$ yang menyatakan besar kekuatan serangan sihir ke-$i$ yang Rudeus miliki.
+
+
+\subsection*{Format Keluaran}
+
+Suatu bilangan bulat yang menyatakan banyak kemungkinan kombinasi sihir yang dapat Rudeus gunakan.
+
+\begin{multicols}{2}
+\subsection*{Contoh Masukan 1}
+\begin{lstlisting}
+3 3
+1
+4
+7
+\end{lstlisting}
+\columnbreak
+\subsection*{Contoh Keluaran 1}
+\begin{lstlisting}
+9
+\end{lstlisting}
+\vfill
+\null
+\end{multicols}
+
+\begin{multicols}{2}
+\subsection*{Contoh Masukan 2}
+\begin{lstlisting}
+2 3
+1
+1
+\end{lstlisting}
+\columnbreak
+\subsection*{Contoh Keluaran 2}
+\begin{lstlisting}
+0
+\end{lstlisting}
+\vfill
+\null
+\end{multicols}
+
+
+\subsection*{Penjelasan}
+
+Pada contoh 1, Rudeus memiliki 3 sihir dengan serangan masing-masing 1, 4, dan 7 dan harus mengombinasikan 3 sihir. Berikut adalah 9 kombinasi yang dapat digunakan Rudeus:
+
+\begin{enumerate}
+\item $[1, 2, 2]: 1 + 4 + 4 = 9$
+\item $[2, 1, 2]: 4 + 1 + 4 = 9$
+\item $[2, 2, 1]: 4 + 4 + 1 = 9$
+\item $[1, 1, 3]: 1 + 1 + 7 = 9$
+\item $[1, 3, 1]: 1 + 7 + 1 = 9$
+\item $[3, 1, 1]: 7 + 1 + 7 = 9$
+\item $[2, 3, 3]: 1 + 4 + 4 = 18$
+\item $[3, 2, 3]: 1 + 4 + 4 = 18$
+\item $[2, 3, 3]: 1 + 4 + 4 = 18$
+\end{enumerate}
+
+Pada contoh 2, Rudeus tidak dapat membuat satupun kombinasi sihir yang menghasilkan kelipatan 9.
+
+\end{document}
