@@ -1,0 +1,112 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx, eso-pic}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\hypersetup{ colorlinks=true, linkcolor=black, filecolor=magenta, urlcolor=cyan}
+\geometry{ a4paper, total={170mm,257mm}, top=10mm, right=20mm, bottom=20mm, left=20mm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3em}
+\renewcommand{\headrulewidth}{0pt}
+
+\rfoot{\thepage}
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\lfoot{\textbf{CP PRAGEMASTIK ITB XVII}}
+\pagenumbering{gobble}
+
+\fancyfoot[CE,CO]{\thepage}
+\lstset{
+    basicstyle=\ttfamily\small,
+    columns=fixed,
+    extendedchars=true,
+    breaklines=true,
+    tabsize=2,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=none,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    prebreak={},
+    keywordstyle=\color[rgb]{0.627,0.126,0.941},
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\color[rgb]{01,0,0},
+    captionpos=t,
+    escapeinside={(\%}{\%)}
+}
+
+\begin{document}
+
+\begin{center}
+
+    
+    \section*{Kurir} % ganti judul soal
+
+    \begin{tabular}{ | c c | }
+        \hline
+        Batas Waktu  & 1s \\    % jangan lupa ganti time limit
+        Batas Memori & 256MB \\  % jangan lupa ganti memory limit
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection*{Deskripsi}
+
+Serika adalah seorang siswi sekolah Abydos yang memiliki jiwa kerja keras yang tinggi. Demi memperoleh dana yang cukup untuk membayar hutang yang dimiliki sekolahnya, selain bekerja paruh waktu di Shibaseki Ramen, kini dia melamar pekerjaan baru menjadi seorang kurir keliling! Kaiser Corporation yang menguasai wilayah sekitar Abydos sekaligus menjadi pemberi hutang sekolah Abydos tentu saja tidak gembira dengan berita ini. Demi memenuhi tujuannya untuk mengusai Abydos secara penuh, Presiden Kaiser Corporation mengeluarkan perintah untuk menyabotase pekerjaan Shiroko dan menghalangi upaya sekolah Abydos untuk membayar hutangnya.
+
+Kompleks di sekitar sekolah Abydos berbentuk pohon berakar dengan pusat komplek adalah markas Kaiser Corporation yang terletak pada kompleks 1. Dua buah kompleks dapat dihubungi oleh satu jalan dua arah. Pada hari tertentu, Serika akan menentukan rencana pengiriman koran dari kompleks A menuju kompleks B. Dengan teknologi canggih yang dimiliki Kaiser Corp., tentunya rencana ini dapat diketahui dengan mudah oleh Presiden Kaiser Corp. Berdasarkan informasi itu, Presiden Kaiser Corp berencana untuk mengirimkan pasukan militer yang berarak dari markas Kaiser Corporation menuju kompleks B untuk menghentikan Serika. Agar operasi ini memiliki \textit{surprise value}, pasukan akan berangkat tepat saat Serika mulai bergerak dari kompleks A. Kecepatan pergerakan pasukan dan Serika adalah sama dan sebuah rencana pengiriman disebut aman apabila Serika dapat mencapai kompleks B sebelum pasukan Kaiser Corp. sampai. Sensei yang lebih cerdik, mengetahui rencana Presiden ini secara diam-diam. Sebagai guru yang baik, sensei tentunya harus memperingatkan Serika untuk memilih rencana pengiriman yang aman. Bantulah Sensei untuk menemukan banyaknya pasangan A dan B berbeda yang aman untuk dijadikan rencana pengiriman Serika!
+
+(asumsikan baik pasukan dan serika memilih rute terpendek dari A ke B)
+
+\subsection*{Format Masukan}
+
+Baris pertama terdiri atas sebuah bilangan bulat positif yaitu $N$ ($1 \leq N \leq 10^5$) menyatakan banyaknya kompleks.
+
+$N - 1$ baris selanjutnya terdiri atas 2 bilangan bulat positif yaitu $U$ ($1 \leq U \leq N$), $V$ ($1 \leq V \leq N$) yang menyatakan bahwa terdapat jalan antara kompleks $U$ ke kompleks $V$.
+Dipastikan setiap kompleks akan saling terhubung.
+
+\subsection*{Format Keluaran}
+
+Keluarkan sebuah bilangan bulat yang menyatakan banyaknya pasangan A dan B berbeda yang aman untuk dijadikan rencana pengiriman Serika.
+
+\begin{multicols}{2}
+\subsection*{Contoh Masukan 1}
+\begin{lstlisting}
+5
+4 1
+1 5
+2 4
+3 1
+\end{lstlisting}
+\columnbreak
+\subsection*{Contoh Keluaran 1}
+\begin{lstlisting}
+11
+\end{lstlisting}
+\vfill
+\null
+\end{multicols}
+
+
+\subsection*{Penjelasan}
+
+Seluruh kemungkinan pasangan A dan B yang mungkin adalah
+(1, 1)
+(1, 2)
+(1, 3)
+(1, 4)
+(1, 5)
+(2, 2)
+(2, 4)
+(3, 3)
+(4, 2)
+(4, 4)
+(5, 5)
+
+\end{document}
