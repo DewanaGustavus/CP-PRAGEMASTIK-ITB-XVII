@@ -44,9 +44,9 @@ int32_t main()
                     dp[i][j] = max(dp[i][j],arr[i] + dp[i-1][j]);
                 }
                 else if(k == i){
-                    dp[i][j] = max(dp[i][j],squared(prefix_sum[i]-prefix_sum[i-k]) + dp[i-k][j-k]);
+                    dp[i][j] = max(dp[i][j],squared(prefix_sum[i]) + dp[i-k][j-k]);
                 }else{
-                    dp[i][j] = max(dp[i][j],squared(prefix_sum[i]-prefix_sum[i-k]) + dp[i-k-1][j-k]);
+                    dp[i][j] = max(dp[i][j],squared(prefix_sum[i]-prefix_sum[i-k]) + dp[i-k-1][j-k] + arr[i-k]);
                 }
             }
         }
