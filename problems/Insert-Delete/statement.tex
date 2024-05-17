@@ -1,0 +1,140 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx, eso-pic}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\hypersetup{ colorlinks=true, linkcolor=black, filecolor=magenta, urlcolor=cyan}
+\geometry{ a4paper, total={170mm,257mm}, top=10mm, right=20mm, bottom=20mm, left=20mm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3em}
+\renewcommand{\headrulewidth}{0pt}
+
+\rfoot{\thepage}
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\lfoot{\textbf{CP PRAGEMASTIK ITB XVII}}
+\pagenumbering{gobble}
+
+\fancyfoot[CE,CO]{\thepage}
+\lstset{
+    basicstyle=\ttfamily\small,
+    columns=fixed,
+    extendedchars=true,
+    breaklines=true,
+    tabsize=2,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=none,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    prebreak={},
+    keywordstyle=\color[rgb]{0.627,0.126,0.941},
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\color[rgb]{01,0,0},
+    captionpos=t,
+    escapeinside={(\%}{\%)}
+}
+
+\begin{document}
+
+\begin{center}
+
+    
+    \section*{Insert Delete} % ganti judul soal
+
+    \begin{tabular}{ | c c | }
+        \hline
+        Batas Waktu  & 1s \\    % jangan lupa ganti time limit
+        Batas Memori & 256MB \\  % jangan lupa ganti memory limit
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection*{Deskripsi}
+
+Hari ini adalah hari Senin. Sebagai orang dewasa yang berbakti dan masih memiliki kewarasan, Sensei juga tidak menyukai hari tersebut. Untuk mengalihkan perhatiannya terhadap tugas yang menumpuk di meja kantornya, Sensei membuka aplikasi MomoTalk untuk melihat apakah ada pesan baru dari murid-muridnya. Di sana Sensei menemukan sebuah pesan teks dari Ketua OSIS Sekolah Red Winter yang “tirani” dan mungil, Cherino, meminta bantuan Sensei. Besok adalah hari Cherino memberikan pidato akbar kepada pasukan siswi yang dipimpinnya. Cherino akan berdiri di balkon gedung OSIS dan memberikan pidato ke murid yang banyak. Untuk menjaga statusnya sebagai pemimpin yang berkuasa di sana, penting bagi Cherino untuk memberikan pidato yang dapat menggetarkan jiwa. Namun ada satu hal yang menghalanginya. Cherino sangatlah mungil dan dia tidak dapat melihat siswi di bawah karena tingginya tidak cukup untuk melihat melewati pagar balkon! Hal ini sangatlah berbahaya karena Cherino perlu menyebutkan credit score beberapa siswi yang berbaris, namun tidak dapat melakukannya karena dia tidak dapat melihat siswi-siswi secara langsung. Selain itu, siswi yang berbaris tidaklah tetap dan dapat berubah-ubah selama pidato berlangsung.\\
+
+Pada awal pidato dimulai, akan terdapat N siswi yang hadir dan berbaris memanjang. Masing-masing siswi dengan urutan ke-i memiliki credit score $A_i$ ($1 \leq i \leq N$). Pada pidato ini, barisan pasukan haruslah tetap terurut menaik berdasarkan skor kredit yang dimiliki, dan ketika ada perubahan maka pasukan diberikan perintah untuk menyusun ulang barisan dan menjaga kuterturutan pasukan berdasarkan credit score. Pada pidato ini terdapat beberapa $event$ yang dapat terjadi, yaitu :
+
+\begin{enumerate}
+    \item Terdapat siswi baru dengan credit score x masuk ke dalam barisan, siswi harus memasuki barisan dengan keadaan tetap terurut.
+    \item Cherino memerintahkan siswi di urutan ke-i ($1 \leq i \leq N$) untuk keluar dari barisan
+    \item Cherino perlu menyebutkan credit score siswi di urutan ke-i
+    \item Cherino perlu menyebutkan jumlah credit score dari siswi-siswi yang berada dari indeks L hingga R (inklusif, $1 \leq L \leq R \leq N$)
+    \item Cherino memberikan credit score sebesar x ke seluruh siswi
+    \item Cherino mengurangi credit score sebesar x ke seluruh siswi. Credit score siswi tidak akan lebih rendah dari 0. Dengan kata lain, credit score siswi yang baru adalah max(0, $a_i$ - x) untuk setiap $1 \leq i \leq N$.
+\end{enumerate}
+
+Karena tidak dapat melihat siswi secara langsung ketika berpidato, Cherino tidak dapat menyebutkan credit score mereka dengan mudah tanpa membuat kesalahan. Selain itu Cherino tidak ingin menggunakan pijakan kursi tambahan dan berita tentang dirinya yang harus berdiri di atas kursi saat berpidato tersebar. Oleh karena itu, Cherino meminta bantuan dari orang dewasa yang ia percayai, Sensei, untuk membantunya dengan "kekuatan orang dewasa" —dalam hal ini, maksudnya adalah tinggi badan. Karena Sensei tidak dapat hadir secara langsung di samping Cherino, maka Sensei akan membantu Cherino dengan membuatkan program yang dapat menebak credit score siswi yang hadir berdasarkan input yang diberikan. Bantulah Sensei untuk membuat program tersebut!
+
+\pagebreak
+\subsection*{Format Masukan}
+
+Baris pertama terdiri dari satu bilangan bulat positif $N$ ($1 \leq N \leq 100.000$), yang menyatakan banyaknya siswi pada barisan awal.
+
+Baris kedua terdiri dari N buah bilangan bulat positif $A_i (1 \leq A_i \leq 10^5, 1 \leq i \leq N)$, yang menunjukkan credit score siswi ke-i.
+
+Baris ketiga terdiri dari satu bilangan bulat positif $Q$ ($1 \leq Q \leq 100.000$), yang menyatakan banyaknya $event$ yang terjadi ketika Cherino berpidato.\\
+
+Q baris selanjutnya merupakan $event$ sesuai deskripsi dengan format masukan sebagai berikut.
+
+\begin{enumerate}
+    \item 1 X ($1 \leq X \leq 100.000$)
+    \item 2 i ($1 \leq i \leq |A|$), dengan $|A|$ adalah panjang barisan, dipastikan barisan berisi minimum 2 siswi
+    \item 3 i ($1 \leq i \leq |A|$)
+    \item 4 L R ($1 \leq L \leq R \leq |A|$)
+    \item 5 X ($1 \leq X \leq 10$)
+    \item 6 X ($1 \leq X \leq 10$)
+\end{enumerate}
+
+\subsection*{Format Keluaran}
+
+Untuk setiap $event$ dengan jenis 3 dan 4, keluarkan output sesuai perintah.
+
+
+\begin{multicols}{2}
+\subsection*{Contoh Masukan 1}
+\begin{lstlisting}
+5
+5 5 6 6 2
+6
+1 4
+2 6
+5 3
+6 2
+3 2
+4 2 4
+\end{lstlisting}
+\columnbreak
+\subsection*{Contoh Keluaran 1}
+\begin{lstlisting}
+5
+17
+\end{lstlisting}
+\vfill
+\null
+\end{multicols}
+
+
+\subsection*{Penjelasan}
+
+Berikut adalah kondisi barisan untuk setiap $event$ yang terjadi.\\
+Pertama-tama barisan akan mengurut terlebih dahulu menjadi\\
+2 5 5 6 6\\
+Lalu perubahan barisan untuk setiap $event$ adalah sebagai berikut.
+\begin{enumerate}
+    \item 2 4 5 5 6 6
+    \item 2 4 5 5 6
+    \item 5 7 8 8 9
+    \item 3 5 6 6 7
+    \item 3 5 6 6 7
+    \item 3 5 6 6 7
+\end{enumerate}
+
+\end{document}
