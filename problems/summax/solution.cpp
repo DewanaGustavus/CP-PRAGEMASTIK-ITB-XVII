@@ -52,7 +52,7 @@ int32_t main()
         }
     }
 
-    cout << dp[N][K]
+    cout << dp[N][K] << endl
 ;
     return 0;
 }

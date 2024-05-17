@@ -11,7 +11,7 @@ protected:
     int N, K;
     vector<int> val;
 
-    int ans;
+    long long ans;
     void InputFormat() {
         LINE(N, K);
         LINE(val % SIZE(N));
@@ -36,7 +36,7 @@ private:
     bool array_cons(vector<int> &val){
         if(val.size() != N)return false;
         for(int x : val){
-            if(x > AMAX || x <= 0)return false;
+            if(x > AMAX || x < -AMAX)return false;
         }
         return true;
     }
@@ -68,8 +68,12 @@ protected:
                 K = 2,
                 random_array(N, val, 1000));
         for(int i=0;i<10;i++)
-            CASE(N = 5,
-                K = 1e5,
+            CASE(N = 1000,
+                K = 5,
+                random_array(N, val, 1e4));
+        for(int i=0;i<10;i++)
+            CASE(N = 1e4,
+                K = 7,
                 random_array(N, val, 1e5));
         for(int i=0;i<10;i++)
             CASE(N = NMAX,
