@@ -64,7 +64,7 @@ void dnc(vector<cd>& a, int n) {
 
     vector<ll> tempvec(9, 0);
     for (int i = 0; i < half.size(); i++) {
-        ll tempval = half[i].real();
+        ll tempval = (ll) round(half[i].real());
         tempvec[i % 9] = (tempvec[i % 9] + tempval) % MOD;
     }
     
@@ -90,7 +90,7 @@ void solve() {
     }
 
     dnc(freq, k);
-    cout << freq[0].real() << endl;
+    cout << (ll) round(freq[0].real()) << endl;
     return;
 }
 
