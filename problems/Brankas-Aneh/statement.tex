@@ -1,0 +1,115 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx, eso-pic}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\hypersetup{ colorlinks=true, linkcolor=black, filecolor=magenta, urlcolor=cyan}
+\geometry{ a4paper, total={170mm,257mm}, top=10mm, right=20mm, bottom=20mm, left=20mm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3em}
+\renewcommand{\headrulewidth}{0pt}
+
+\rfoot{\thepage}
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\lfoot{\textbf{CP PRAGEMASTIK ITB XVII}}
+\pagenumbering{gobble}
+
+\fancyfoot[CE,CO]{\thepage}
+\lstset{
+    basicstyle=\ttfamily\small,
+    columns=fixed,
+    extendedchars=true,
+    breaklines=true,
+    tabsize=2,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=none,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    prebreak={},
+    keywordstyle=\color[rgb]{0.627,0.126,0.941},
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\color[rgb]{01,0,0},
+    captionpos=t,
+    escapeinside={(\%}{\%)}
+}
+
+\begin{document}
+
+\begin{center}
+
+    
+    \section*{Brankas Aneh} % ganti judul soal
+
+    \begin{tabular}{ | c c | }
+        \hline
+        Batas Waktu  & 1s \\    % jangan lupa ganti time limit
+        Batas Memori & 256MB \\  % jangan lupa ganti memory limit
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection*{Deskripsi}
+
+Pada suatu hari yang tidak cerah, sekolah menengah atas Abydos menemukan bahwa mereka terlilit hutang besar. Shiroko dan teman-temannya memutuskan untuk membobol suatu bank untuk membayar hutang sekolah mereka.
+
+Di hari pembobolan, Shiroko menemukan suatu brankas yang terlihat berisi barang sangat berharga yang dijaga dengan kunci kombinasi sepanjang $N$ dengan kondisi awal masing-masing angka adalah $X_i$ (kunci dapat bernilai negatif). Teman Shiroko sebelumnya telah menemukan kertas berisi $N$ buah angka $Y_i$ yang diduga besar adalah kunci brankas. Namun, mengubah angka dalam kunci brankas tidak semudah yang mereka kira. Brankas tersebut menyediakan $N$ buah tombol $A_i$ dan $N$ buah tombol $B_i$. Apabila tombol $A_i$ ditekan, nilai $X_{i-1}$ dan $X_{i+1}$ akan bertambah sebesar 1. Sebaliknya, apabila tombol $B_i$ ditekan, nilai $X_{i-1}$ dan $X_{i+1}$ akan berkurang sebesar 1.
+
+Bantulah Shiroko dan teman-temannya menentukan apakah mereka dapat menghasilkan kombinasi $Y$ dari kondisi awal $X$!
+
+\subsection*{Format Masukan}
+
+Baris pertama terdiri dari satu bilangan bulat positif $T$ ($1 \leq N \leq 10^{9}$)  yang banyak kasus.
+
+Setiap kasus terdiri atas 3 baris. Baris pertama terdiri dari satu bilangan bulat positif $N$ ($1 \leq N \leq 10^{9}$)  yang menyatakan panjang kunci kombinasi. 
+$2$ baris berikutnya berisi nilai $X_i$ ($-10^{5} \leq X_i \leq 10^{5}$) dan $Y_i$ ($-10^{5} \leq Y_i \leq 10^{5}$) yang masing-masing menyatakan kondisi awal brankas dan perkiraan kunci brankas.
+
+\subsection*{Format Keluaran}
+
+Setiap kasus memiliki keluaran satu kata yaitu "Ya" apabila kunci brankas dapat dicapai dari kondisi awal dan "Tidak" apabila sebaliknya.
+
+\subsection*{Batasan Tambahan}
+$T \times N \leq 5 \times 10^{8}$
+
+\begin{multicols}{2}
+\subsection*{Contoh Masukan 1}
+\begin{lstlisting}
+2
+5
+4 2 1 4 6
+6 4 2 6 5
+5
+1 2 3 4 5
+6 6 6 6 6
+\end{lstlisting}
+\columnbreak
+\subsection*{Contoh Keluaran 1}
+\begin{lstlisting}
+Ya
+Tidak
+\end{lstlisting}
+\vfill
+\null
+\end{multicols}
+
+
+\subsection*{Penjelasan}
+
+Pada contoh 1, kunci brankas dapat dicapai dengan melakukan aksi berikut:
+
+\begin{enumerate}
+\item Menekan tombol $A_1$ sebanyak 2 kali
+\item Menekan tombol $A_2$ sebanyak 2 kali
+\item Menekan tombol $B_3$ sebanyak 1 kali
+\end{enumerate}
+
+Pada contoh 2, dapat ditunjukkan bahwa kunci brankas tidak akan mungkin dapat dicapai dari kondisi awal.
+
+\end{document}
