@@ -5,7 +5,7 @@ using namespace std;
 
 class ProblemSpec : public BaseProblemSpec {
 protected:
-    const int SUM_NMAX = 1e7;
+    const int SUM_NMAX = 2e5;
     const int AMAX = 1e5;
     int T;
     vector<vector<int>> data;
@@ -82,16 +82,16 @@ protected:
             CASE(T = 10, random_data(T, 100, data, AMAX));
         for(int i=0;i<10;i++)
             CASE(T = 100, random_data(T, 1000, data, AMAX));
+        for(int i=0;i<5;i++)
+            CASE(T = 2, random_data(T, 1e5, data, AMAX));
+        for(int i=0;i<5;i++)
+            CASE(T = 20, random_data(T, 1e4, data, AMAX));
         for(int i=0;i<10;i++)
-            CASE(T = 10, random_data(T, 1e5, data, AMAX));
+            CASE(T = 1000, random_data(T, 100, data, AMAX));
         for(int i=0;i<10;i++)
-            CASE(T = 100, random_data(T, 1e5, data, AMAX));
+            CASE(T = 1e3, random_data(T, 200, data, AMAX));
         for(int i=0;i<10;i++)
-            CASE(T = 1000, random_data(T, 1000, data, AMAX));
-        for(int i=0;i<10;i++)
-            CASE(T = 1e5, random_data(T, 10, data, AMAX));
-        for(int i=0;i<10;i++)
-            CASE(T = 1e5, random_data(T, 100, data, AMAX));
+            CASE(T = 1e4, random_data(T, 20, data, AMAX));
     }
 
 private:
