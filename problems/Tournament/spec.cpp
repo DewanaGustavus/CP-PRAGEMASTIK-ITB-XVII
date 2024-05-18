@@ -144,8 +144,8 @@ private:
     void random_query(int n, int q, vector<int> &X, vector<int> &L, vector<int> &R){
         for(int i=0;i<q;i++){
             X.push_back(rnd.nextInt(1, n));
-            L.push_back(rnd.nextInt(1, n));
-            R.push_back(rnd.nextInt(L[i], n));
+            L.push_back(rnd.nextInt(1, min(n, 100)));
+            R.push_back(rnd.nextInt(max(L[i], n-100), n));
         }
     }
 };
