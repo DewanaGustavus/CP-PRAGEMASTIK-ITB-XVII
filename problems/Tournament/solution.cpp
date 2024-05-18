@@ -1,4 +1,4 @@
-// Time Complexity : O((n + q + AMAX) * log(n))
+// Time Complexity : O((n + q) * log(n))
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -6,101 +6,106 @@ using namespace std;
 #define range(i,s,e)		for(int i=s;i<e;i++)
 #define int                 long long
 
-struct node{
-    int l, r;
-    int val = 0;
-    node *tl = nullptr, *tr = nullptr;
-    node(int a, int b){
-        l = a;
-        r = b;
+
+struct segtree{
+    // segment tree bottom up traversal
+    // 0-indexing, left child is 2*i, right child is 2*i+1, parent is floor(i/2)
+    // template for sum range
+    int n;
+    vector<int> segment;
+    int init = 0; // initialize array value
+    int operation(int a, int b){return a+b;} // segment tree operation
+    segtree(vector<int> array){
+        n = log2(array.size()-1) + 1;
+        n = (1<<n);
+        segment = vector<int>(2*n, init);
+        for(int i=0;i<array.size();i++){
+            add(i, array[i]);
+        }
     }
-    int sum(int ql, int qr){
-        if(ql > r || qr < l)return 0;
-        if(ql <= l && r <= qr)return val;
-        int ans = 0;
-        if(tl)ans += tl->sum(ql, qr);
-        if(tr)ans += tr->sum(ql, qr);
+    void add(int idx, int val){
+        idx += n;
+        segment[idx] += val;
+        for(idx/=2;idx>=1;idx/=2){
+            segment[idx] = operation(segment[2*idx], segment[2*idx + 1]); 
+        }
+    }
+    int sum(int l, int r) {
+        l += n;
+        r += n;
+        int ans = init;
+        while (l <= r) {
+            if (l%2 == 1) ans = operation(ans, segment[l++]);
+            if (r%2 == 0) ans = operation(ans, segment[r--]);
+            l /= 2; r /= 2;
+        }
         return ans;
     }
 };
 
-void build(node* root){
-    int l = root->l;
-    int r = root->r;
-    if(l == r){
-        root->val = 0;
-        return;
+
+struct queries {
+    int x,idx;
+    queries() {}
+    queries(int _x, int _idx) {
+        x = _x;
+        idx = _idx;
     }
-    int mid = (l + r)/2;
-    root->tl = new node(l, mid);
-    root->tr = new node(mid+1, r);
-    build(root->tl);
-    build(root->tr);
-    root->val = root->tl->val + root->tr->val;
-}
+};
 
-node* add_persistent(int idx, int val, node* root){
-    int l = root->l;
-    int r = root->r;
-    node* new_node = new node(l, r);
-    int mid = (l+r)/2;
-    if(l == idx && r == idx){
-        new_node->val = val + root->val;
-        return new_node;
-    }else if(l <= idx && idx <= mid){
-        new_node->tr = root->tr;
-        new_node->tl = add_persistent(idx, val, root->tl);
-    }else{
-        new_node->tl = root->tl;
-        new_node->tr = add_persistent(idx, val, root->tr);
-    }
-    new_node->val = new_node->tl->val + new_node->tr->val;
-    return new_node;
-}
-
-node* get_persistent(node* root){
-    node* new_node = new node(root->l,root->r);
-    new_node->tl = root->tl;
-    new_node->tr = root->tr;
-    new_node->val = root->val;
-    return new_node;
-}
-
-vector<node*> roots;
 int32_t main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);cout.tie(0);
 
+    int n; cin>>n;
     const int amax = 1e6;
 
-    int n; cin>>n;
-    int a[n];
+    int a[n + 1] = {};
     range(i,0,n) cin >> a[i];
+    a[n] = amax + 1;
 
-    node* initial = new node(0, amax);
-    build(initial);
-    roots.push_back(initial);
-
-    range(i,0,n) {
-        node* new_node = add_persistent(a[i], 1, roots.back());
-        roots.push_back(new_node);
-    }
-
-    // range(i,0,n + 1) {
-    //     range(j,0,amax + 1) {
-    //         prints(roots[i]->sum(j,j))
-    //     }
-    //     endline
-    // }
+    vector<int> dummy(amax + 2);
+    segtree st(dummy);
 
     int q; cin >> q;
+    vector<queries> queRySl[n + 1];
+    vector<queries> queRySr[n + 1];
     range(i,0,q) {
-        int x,l,r;
+        int x, l, r;
         cin >> x >> l >> r;
+        
+        queries IRySl(a[x - 1], i);
+        queries IRySr(a[x - 1], i);
+        queRySl[l - 1].push_back(IRySl);
+        queRySr[r].push_back(IRySr);
+    }
 
-        int val = a[x - 1];
-        int cnt = roots[r]->sum(0, val - 1) - roots[l - 1]->sum(0, val - 1);
-        cout << cnt << endl;
+    int cntl[q] = {};
+    int cntr[q] = {};
+    range(i,1,n + 1) {
+        st.add(a[i - 1], 1);
+        
+        for(queries IRyS : queRySl[i]) {
+            cntl[IRyS.idx] = st.sum(0, IRyS.x - 1);
+        }
+        for(queries IRyS : queRySr[i]) {
+            cntr[IRyS.idx] = st.sum(0, IRyS.x - 1);
+        }
+
+        // range(i,0,7) {
+        //     cout << st.sum(i,i) << " ";
+        // }
+        // cout << endl;
+    }
+
+    // range(i,0,q) cout << (cntl[i]) << " ";
+    // cout << endl;
+    // range(i,0,q) cout << (cntr[i]) << " ";
+    // cout << endl;
+
+    range(i,0,q) {
+        int ans = cntr[i] - cntl[i];
+        cout << ans << endl;
     }
 
     return 0;
