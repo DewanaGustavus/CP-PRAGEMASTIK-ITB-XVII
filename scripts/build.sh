@@ -11,8 +11,10 @@ index=0
 folders=$(ls -d $PROBLEM_PATH)
 for folder in $folders; do
     letter=${alphabet[index]}
-    echo "Generating Problem $letter $folder"
-    $GENERATOR_PATH $letter $folder "$folder" $TIME_LIMIT $MEMORY_LIMIT $OUTPUT_PATH
+    problem_name=$(basename "$folder")
+
+    echo "Generating Problem $letter $problem_name"
+    $GENERATOR_PATH $letter $folder "$problem_name" $TIME_LIMIT $MEMORY_LIMIT $OUTPUT_PATH
     echo " "
     ((index++))
 done

@@ -68,7 +68,7 @@ void solve() {
     memset(ans, -1, sizeof(ans));
     forn(itr, height.size()) {
         // merge all with same height
-        for(int pppp = itr; pppp < height.size() && height[pppp].first == height[itr].first; ++pppp) {
+        for(int pppp = itr; pppp < (int)height.size() && height[pppp].first == height[itr].first; ++pppp) {
             pair<int, int> _ij = to2d(height[pppp].second, m);
             int i = _ij.first;
             int j = _ij.second;
@@ -84,7 +84,7 @@ void solve() {
         }
 
         // get all answer
-        for(int pppp = itr; pppp < height.size() && height[pppp].first == height[itr].first; ++pppp) {
+        for(int pppp = itr; pppp < (int)height.size() && height[pppp].first == height[itr].first; ++pppp) {
             pair<int, int> _ij = to2d(height[pppp].second, m);
             int i = _ij.first;
             int j = _ij.second;
@@ -96,7 +96,7 @@ void solve() {
     }
 
     forn(i, n) {
-        forn(j, m) cout << ans[i][j] << ' '; cout << '\n';
+        forn(j, m) cout << ans[i][j] << " \n"[j == (m-1)];
     }
 }
 

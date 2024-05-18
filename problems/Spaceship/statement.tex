@@ -1,0 +1,112 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx, eso-pic}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\hypersetup{ colorlinks=true, linkcolor=black, filecolor=magenta, urlcolor=cyan}
+\geometry{ a4paper, total={170mm,257mm}, top=10mm, right=20mm, bottom=20mm, left=20mm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3em}
+\renewcommand{\headrulewidth}{0pt}
+
+\rfoot{\thepage}
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\lfoot{\textbf{CP PRAGEMASTIK ITB XVII}}
+\pagenumbering{gobble}
+
+\fancyfoot[CE,CO]{\thepage}
+\lstset{
+    basicstyle=\ttfamily\small,
+    columns=fixed,
+    extendedchars=true,
+    breaklines=true,
+    tabsize=2,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=none,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    prebreak={},
+    keywordstyle=\color[rgb]{0.627,0.126,0.941},
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\color[rgb]{01,0,0},
+    captionpos=t,
+    escapeinside={(\%}{\%)}
+}
+
+\begin{document}
+
+\begin{center}
+
+    
+    \section*{Spaceship} % ganti judul soal
+
+    \begin{tabular}{ | c c | }
+        \hline
+        Batas Waktu  & 1s \\    % jangan lupa ganti time limit
+        Batas Memori & 256MB \\  % jangan lupa ganti memory limit
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection*{Deskripsi}
+
+"Tidak bisa dibiarkan!", sebuah kalimat yang Momoi katakan kepada saudarinya Midori setelah Yuuka, sang anggota osis galak yang sempat hampir menutup klub game development yang dua saudari ini bangun, mengalahkan skor tertinggi mereka pada game terbaru, Guardian Shooter MK2. Sebagai \textit{gamers}, Momoi dan Midori tahu bahwa mengalahkan skor tertinggi merupakan hal yang lumrah. Namun, yang membuat kedua saudari ini menjadi geram adalah Yuuka yang jarang memainkan video game baru saja mengalahkan skor multiplayer mereka dalam mode single player! Entah dengan kemampuan matematika dan analisisnya yang sangat baik, Yuuka telah melakukan hal yang tidak mungkin. Mengingat ketawa mengejek Yuuka sebelumnya, kedua saudari ini tidak menerima harga diri mereka sebagai \textit{gamers} dinodai dan berencana untuk membalas dendam. Rencana mereka kali ini adalah memperoleh skor maksimal dengan bantuan dari Sensei.\\
+
+Guardian Shooter MK2 adalah sebuah game menembak pada sebuah grid dengan ukuran n baris dan m kolom. Indeks grid kiri atas adalah (1,1) dan kanan bawah adalah (n,m). Musuh-musuh akan diletakkan pada setiap kotak grid dan masing-masing musuh memiliki nilai poin $P_{ij}$. Objek kontrol Momoi dan Midori adalah dua pesawat yang terletak pada baris ke-0. Pesawat tersebut dapat bergerak hanya pada baris-0 dan kolom [1,m] dan akan menembak ke bawah langsung ke musuh-musuh. Meriam yang ada pada pesawat adalah blaster triple shot yang akan menembahkan tiga buah peluruh plasma ke arah diagonal kiri bawah, bawah, dan diagonal kanan bawah dan memiliki sifat piercing atau menembus musuh. Untuk definisi formalnya, pesawat yang terletak pada posisi grid (0, x), akan dapat membasmi musuh yang berada pada posisi (t, x-t+1), (t, x), atau (t, x+t-1) untuk t merupakan bilangan positif di setiap tembakannya. Pemain akan mendapatkan skor berdasarkan total poin musuh yang dibasmi.\\
+
+Sebagai orang dewasa yang dapat diandalkan murid-murid Kivotos, bantulah Momoi dan Midori untuk menentukan skor maksimal yang dapat diperoleh!
+
+\subsection*{Format Masukan}
+
+Baris pertama terdiri atas dua bilangan bulat positif yaitu $N$, $M$ ($1 \leq N, M \leq 10^3$) yang menyatakan jumlah baris dan kolom grid.
+
+$N$ baris berikutnya terdiri atas $M$ buah angka $P_{ij}$ ($1 \leq P_{ij} \leq 10^9$) yang menandakan poin-poin musuh.
+
+\subsection*{Format Keluaran}
+
+Sebuah bilangan bulat positif yang menunjukkan skor maksimal yang dapat diperoleh.
+
+\begin{multicols}{2}
+\subsection*{Contoh Masukan 1}
+\begin{lstlisting}
+5 5
+4 10 10 7 5
+4 7 5 10 7
+1 1 10 7 7
+7 2 3 4 2
+8 4 7 4 4
+\end{lstlisting}
+\columnbreak
+\subsection*{Contoh Keluaran 1}
+\begin{lstlisting}
+97
+\end{lstlisting}
+\vfill
+\null
+\end{multicols}
+
+
+\subsection*{Penjelasan}
+
+Misal Momoi dan Midori menembak pada kolom 2 dan 5.\\
+Berikut adalah ilustrasi poin yang akan Momoi dan Midori dapatkan, ditandai dengan (x)
+
+\begin{tabular}{lllll}
+4   & (10) & 10   & 7    & (5) \\
+(4) & (7)  & (5)  & (10) & (7) \\
+1   & (1)  & (10) & (7)  & (7) \\
+7   & (2)  & 3    & 4    & (2) \\
+(8) & (4)  & 7    & 4    & (4)
+\end{tabular}
+
+Total poin yang Momoi dan Midori dapatkan adalah 93.
+
+\end{document}

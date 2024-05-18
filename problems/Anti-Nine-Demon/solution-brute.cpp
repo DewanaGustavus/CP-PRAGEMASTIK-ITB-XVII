@@ -22,12 +22,12 @@ void solve() {
 
     vector<ll> ans(freq);
 
-    for (ll i = 0; i < k - 1; i++) { // Iterate over k
+    for (ll i = 2; i <= k; i++) { // Iterate over k
         vector<ll> temp(9, 0);
 
-        for (ll j = 0; j < 9; j++) {
-            for (ll k = 0; k < 9; k++) {
-                temp[(j + k) % 9] = (temp[(j + k) % 9] + (ans[j] * freq[k])) % MOD;
+        for (ll x = 0; x < 9; x++) {
+            for (ll y = 0; y < 9; y++) {
+                temp[(x + y) % 9] = (temp[(x + y) % 9] + (ans[x] * freq[y])) % MOD;
             }
         }
 

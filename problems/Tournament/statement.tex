@@ -1,0 +1,109 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx, eso-pic}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\hypersetup{ colorlinks=true, linkcolor=black, filecolor=magenta, urlcolor=cyan}
+\geometry{ a4paper, total={170mm,257mm}, top=10mm, right=20mm, bottom=20mm, left=20mm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3em}
+\renewcommand{\headrulewidth}{0pt}
+
+\rfoot{\thepage}
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\lfoot{\textbf{CP PRAGEMASTIK ITB XVII}}
+\pagenumbering{gobble}
+
+\fancyfoot[CE,CO]{\thepage}
+\lstset{
+    basicstyle=\ttfamily\small,
+    columns=fixed,
+    extendedchars=true,
+    breaklines=true,
+    tabsize=2,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=none,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    prebreak={},
+    keywordstyle=\color[rgb]{0.627,0.126,0.941},
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\color[rgb]{01,0,0},
+    captionpos=t,
+    escapeinside={(\%}{\%)}
+}
+
+\begin{document}
+
+\begin{center}
+
+    
+    \section*{Tournament} % ganti judul soal
+
+    \begin{tabular}{ | c c | }
+        \hline
+        Batas Waktu  & 1s \\    % jangan lupa ganti time limit
+        Batas Memori & 256MB \\  % jangan lupa ganti memory limit
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection*{Deskripsi}
+
+Hari ini adalah hari yang besar di seluruh Kivotos. Sebuah festival olahraga akbar, Kivotos Halo Festivals, sedang diadakan di Sekolah Milennium! Pada acara ini, seluruh siswi di Kivotos saling bertanding di berbagai macam bidang olahraga dan diberikan kesempatan untuk membanggakan sekolahnya dengan menjadi yang terbaik diantara yang terbaik. Kali ini \textit{The super genius and sickly, beautiful girl hacker}, Himari, tidak menjadikan keterbatasan fisiknya sebagai halangan untuk datang menghadiri festival dan menyemangati teman-temannya. Karena ini adalah kesempatan yang jarang terjadi, Sensei memutuskan untuk menemani Himari dan memastikan keamanan Himari selama keberlangsungan acara.\\
+
+Pada suatu sesi bidang olahraga, Himari memamerkan sebuah alat yang telah dia kembangkan khusus untuk hari ini kepada Sensei. Alat tersebut dapat membuat Himari mengukur kekuatan seseorang menjadi angka yang dapat dibandingkan antara satu sama lain. Himari membiarkan Sensei untuk mencoba alat ini, namun ini adalah sebuah jebakan! Himari memberikan sebuah tantangan kepada Sensei dan jika dia tidak dapat memenuhinya maka Sensei harus mentraktir Himari untuk makan malam di tempat yang mewah. Seluruh murid yang sedang bertanding di lapangan terdiri dari N orang dan masing-masing diberikan indeks i ($1 \leq i \leq N$) agar dapat dikenali dengan mudah. Masing-masing murid ke-i memiliki power $a_i$ dan masing-masing siswa akan bertanding satu lawan satu di permainan Badminton. Himari meminta Sensei untuk memperkirakan berapa kali murid ke-i menang melawan murid seluruh murid dengan indeks ke L sampai R (inklusif) ($1 \leq L \leq R \leq N$). Seorang murid ke-i akan menang melawan murid ke-j apabila $a_i > a_j$. Tantangan ini tentulah mudah. Oleh karena itu Himari akan menanyai Sensei berbagai macam pasangan L dan R dan Sensei harus menjawab seluruh pertanyaan Himari dalam batas waktu.\\
+
+Dikarenakan uang di dompet Sensei telah habis untuk membeli figuran Kaiten FX MK.0 seminggu yang lalu, Sensei tidak ingin mengecewakan muridnya karena tidak dapat mentraktirnya. Bantulah Sensei untuk menyelesaikan tantangan ini!
+
+\subsection*{Format Masukan}
+
+Baris pertama terdiri dari satu bilangan bulat positif $N$ ($1 \leq N \leq 100.000$), yang menyatakan banyaknya murid yang berpartisipasi dalam Kivotos Halo Festivals.
+
+Baris kedua terdiri dari N buah bilangan bulat positif $a_i (1 \leq a_i \leq 10^6, 1 \leq i \leq N)$, yang merupakan power para murid.
+
+Baris ketiga terdiri dari satu bilangan bulat positif $Q$ ($1 \leq Q \leq 100.000$), yang menyatakan banyaknya pertanyaan Himari kepada Sensei.
+
+$Q$ baris selanjutnya terdiri atas tiga bilangan positif yaitu $i$, $L$, dan $R$ yang merupakan pertanyaan-pertanyaan Himari kepada Sensei.
+
+\subsection*{Format Keluaran}
+
+Keluarkan $Q$ baris berisi sebuah bilangan bulat $X$ yang merupakan jawaban dari pertanyaan Himari.
+
+\begin{multicols}{2}
+\subsection*{Contoh Masukan 1}
+\begin{lstlisting}
+5
+4 2 3 4 2
+5
+1 3 5
+2 1 5
+3 2 4
+4 2 4
+5 1 5
+\end{lstlisting}
+\columnbreak
+\subsection*{Contoh Keluaran 1}
+\begin{lstlisting}
+2
+0
+1
+2
+0
+\end{lstlisting}
+\vfill
+\null
+\end{multicols}
+
+
+
+\end{document}

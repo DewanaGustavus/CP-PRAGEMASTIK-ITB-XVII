@@ -6,9 +6,10 @@ using namespace std;
 class ProblemSpec : public BaseProblemSpec {
 protected:
     const int NMAX = 1e5;
-    const int KMAX = 1e9;
+    const long long KMAX = 1000000000000000000;
     const int A_LEN_MAX = 100;
-    int N, K;
+    int N;
+    long long K;
     vector<string> val;
 
     int ans;
@@ -94,7 +95,7 @@ protected:
                 random_array(N, val, A_LEN_MAX));
         for(int i=0;i<10;i++)
             CASE(N = rnd.nextInt(1, NMAX),
-                K = rnd.nextInt(1, KMAX),
+                K = rnd.nextLongLong(1, KMAX),
                 random_array(N, val, rnd.nextInt(1, A_LEN_MAX)));
     }
 

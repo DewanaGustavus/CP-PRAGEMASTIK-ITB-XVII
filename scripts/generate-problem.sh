@@ -67,7 +67,7 @@ for testcases in "$PROBLEM_SLUG/tc/*"; do
 done
 
 cd "$TEMP_FOLDER/data/secret"
-rm -f *_sample_*
+# rm -f *_sample_*
 rename 's/\.out$/.ans/' *
 rename 's/^.*_//' *
 cd - > /dev/null
@@ -76,7 +76,10 @@ cd - > /dev/null
 cp "$PROBLEM_SLUG/statement.pdf" "$TEMP_FOLDER/problem.pdf"
 
 # zipping everything
-zip -r "$TEMP_FOLDER/problem.zip" "$TEMP_FOLDER" > /dev/null
+cd $TEMP_FOLDER
+zip -r "problem.zip" "." > /dev/null
+cd -
+
 cp "$TEMP_FOLDER/problem.zip" "$DEST_FOLDER/$PROBID.zip"
 mv "$TEMP_FOLDER/problem.zip" "$PROBLEM_SLUG/$PROBID.zip"
 

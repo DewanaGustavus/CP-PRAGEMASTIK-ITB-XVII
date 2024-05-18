@@ -1,0 +1,93 @@
+# docker-compose.yml
+
+networks:
+  domjudge:
+    name: DOMJudge
+
+services:
+  mariadb:
+    container_name: domjudge-mariadb
+    image: mariadb:latest
+    networks:
+      - domjudge
+    ports:
+      - 13306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpw
+      - MYSQL_USER=domjudge
+      - MYSQL_PASSWORD=djpw
+      - MYSQL_DATABASE=domjudge
+    command: --max-connections=1000
+    healthcheck:
+      test: mariadb -h localhost -u root --password=rootpw -e 'SELECT 1'
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  domserver:
+    container_name: domjudge-domserver
+    image: domjudge/domserver:latest
+    networks:
+      - domjudge
+    ports:
+      - 12345:80
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    environment:
+      - CONTAINER_TIMEZONE=Asia/Jakarta
+      - MYSQL_HOST=mariadb
+      - MYSQL_ROOT_PASSWORD=rootpw
+      - MYSQL_USER=domjudge
+      - MYSQL_PASSWORD=djpw
+      - MYSQL_DATABASE=domjudge
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  judgehost-0:
+    container_name: domjudge-judgehost-0
+    image: domjudge/judgehost:latest
+    privileged: true
+    hostname: judgedaemon-0
+    networks:
+      - domjudge
+    depends_on:
+      domserver:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      - DAEMON_ID=0
+      - JUDGEDAEMON_PASSWORD=${API_PASSWORD}
+      
+  judgehost-1:
+    container_name: domjudge-judgehost-1
+    image: domjudge/judgehost:latest
+    privileged: true
+    hostname: judgedaemon-1
+    networks:
+      - domjudge
+    depends_on:
+      domserver:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      - DAEMON_ID=1
+      - JUDGEDAEMON_PASSWORD=${API_PASSWORD}
+
+  judgehost-2:
+    container_name: domjudge-judgehost-2
+    image: domjudge/judgehost:latest
+    privileged: true
+    hostname: judgedaemon-2
+    networks:
+      - domjudge
+    depends_on:
+      domserver:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      - DAEMON_ID=2
+      - JUDGEDAEMON_PASSWORD=${API_PASSWORD}
