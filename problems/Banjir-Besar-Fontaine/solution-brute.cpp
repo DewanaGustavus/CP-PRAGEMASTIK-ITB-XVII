@@ -20,6 +20,7 @@ int fill(int x, int y, int height) {
     if (vis[x][y]) {
         return 0;
     }
+    vis[x][y] = 1;
 
     int ret = 1;
 
