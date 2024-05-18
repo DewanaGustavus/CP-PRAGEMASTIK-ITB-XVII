@@ -5,7 +5,7 @@ using namespace std;
 
 class ProblemSpec : public BaseProblemSpec {
 protected:
-    const long long NMAX = 1e10;
+    const long long NMAX = 1e9;
     long long N;
 
     int ans;
@@ -56,8 +56,8 @@ protected:
     void TestCases() {
         for(int i=1;i<=10;i++)CASE(N = 2 * i);
         for(int i=0;i<10;i++)CASE(N = 2 * rnd.nextLongLong(1,1000));
-        for(int i=0;i<10;i++)CASE(N = 2 * rnd.nextLongLong(1,1e6));
-        for(int i=0;i<10;i++)CASE(N = 2 * rnd.nextLongLong(1,1e8));
+        for(int i=0;i<10;i++)CASE(N = 2 * rnd.nextLongLong(1,1e5));
+        for(int i=0;i<10;i++)CASE(N = 2 * rnd.nextLongLong(1,1e7));
         for(int i=0;i<10;i++)CASE(N = 2 * rnd.nextLongLong(1,NMAX / 2));
     }
 
