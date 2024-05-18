@@ -40,7 +40,7 @@ int32_t main()
 
     for (int i = 2; i <= N; i++)
     {
-        for (int j = 0; j <= K; j++)
+        for (int j = 0; j <= min(i, K); j++)
         {
             for (int k = 0; k <= j; k++)
             {
@@ -56,7 +56,10 @@ int32_t main()
         }
     }
 
-    cout << dp[N][K] << endl
+    int ans = -INF;
+    for(int i=0;i<=K;i++) ans = max(ans,dp[N][i]);
+
+    cout << ans << endl
 ;
     return 0;
 }
