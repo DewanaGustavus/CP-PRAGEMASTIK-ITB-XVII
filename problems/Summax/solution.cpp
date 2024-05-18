@@ -34,6 +34,7 @@ int32_t main()
         for (int j = 0; j <= K; j++)
             dp[i][j] = -INF;
 
+    dp[0][0] = 0;
     dp[1][0] = arr[1];
     dp[1][1] = squared(arr[1]);
 
